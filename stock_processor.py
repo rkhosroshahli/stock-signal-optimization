@@ -7,8 +7,8 @@ from ta.trend import sma_indicator, ema_indicator
 
 def stock_processor(ticker):
     fillna = False
-    msft = yf.Ticker(ticker)
-    df_ticker = msft.history(period="max")
+    stock = yf.Ticker(ticker)
+    df_ticker = stock.history(period="max")
 
     sma_days = 9
     df_ticker[f'trend_sma_{sma_days}'] = sma_indicator(close=df_ticker['Close'], window=sma_days, fillna=fillna)
@@ -28,7 +28,7 @@ def stock_processor(ticker):
     ema_days = 200
     df_ticker[f'trend_ema_{ema_days}'] = ema_indicator(close=df_ticker['Close'], window=ema_days, fillna=fillna)
 
-    df_ticker = df_ticker.loc['2022':'2023']
+    df_ticker = df_ticker.loc['2012':'2023']
 
     return df_ticker
 
